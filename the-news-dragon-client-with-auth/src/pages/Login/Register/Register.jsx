@@ -3,6 +3,7 @@ import { Button, Container, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../providers/AuthProvider';
 import { useState } from 'react';
+import useTitle from '../../../hooks/UseTitle';
 
 const Register = () => {
     const { createUser } = useContext(AuthContext);
@@ -15,7 +16,7 @@ const Register = () => {
         const photo = form.photo.value;
         const email = form.email.value;
         const password = form.password.value;
-
+        useTitle('Register')
         console.log(name, photo, email, password)
         createUser(email, password)
             .then(result => {
@@ -60,7 +61,7 @@ const Register = () => {
                         name="accept"
                         label={<>Accept <Link to="/terms">Terms and Conditions</Link> </>} />
                 </Form.Group>
-                <Button variant="primary" disabled={!accepted} type="submit">
+                <Button variant="primary" disabled={accepted} type="submit">
                     Register
                 </Button>
                 <br />
